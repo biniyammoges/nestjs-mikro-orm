@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  #database service
+  mysql_db:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: 'defaultDb'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+
+  #phpmyadmin service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    # restart: always
+    environment:
+      PMA_HOST: mysql_db
+      PMA_USER: user
+      PMA_PASSWORD: password
+    ports:
+      - '8080:80'
+
+volumes:
+  mysql:
